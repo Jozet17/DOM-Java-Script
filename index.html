@@ -1,8 +1,143 @@
+<!DOCTYPE html>
 <html>
-  <head>
-    <title>Ejemplo Hotel Atlantida</title>
-  </head>
-  <body>
-    <h1>Pagina Principal</h1>
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM CAJITAS</title>
+    <style>
+        body {
+            background-color: #38bba9;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        div {
+            width: 20%;
+            border: 4px solid rgb(0, 0, 0);
+            font-size: 1em;
+            color: rgb(0, 0, 0);
+            background-color: rgba(11, 192, 5, 0.692);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 20px;
+        }
+
+        .claseejemplo {
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-size: small;
+        }
+
+        #elemento {
+            background-color: aqua;
+        }
+
+        button {
+            background: transparent;
+            color: #000000;
+            padding: 15px 30px;
+            border: 3px solid #000000; 
+            border-radius: 15px;
+            cursor: pointer; 
+            transition: background 0.3s, color 0.3s;
+        }
+
+        button:hover {
+            background: #6a11cb;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div id="id1">
+        <p>Permite interactuar con el contenido HTML de un elemento específico en un documento web. Su principal función es acceder y modificar el contenido interno de un elemento, lo que incluye todo el HTML que se encuentra dentro de dicho elemento, pero excluye el propio elemento en sí.</p>
+        <button onclick="prueba1()">Siguiente</button>
+    </div>
+
+    <div id="id2">
+        <p class="claseejemplo">getElementsByClassName es un método de JavaScript que permite seleccionar todos los elementos del DOM que tienen una clase específica y devuelve una colección de esos elementos. Esta colección se actualiza automáticamente si se añaden o eliminan elementos en el DOM con esa clase.</p>
+        <p class="claseejemplo" id="elemento">Este texto va tener un resaltado.</p>
+        <button onclick="prueba2()">Aceptar</button>
+        <button onclick="volver2()">Regresar</button>
+    </div>
+
+    <div id="id3">
+        <h2>Parece que no cambió nada</h2>
+        <p>es un método de JavaScript que selecciona todos los elementos del DOM que tienen un nombre de etiqueta específico y devuelve una colección de esos elementos. Esta colección se puede usar para manipular y aplicar cambios a todos los elementos coincidentes, como resaltar texto o modificar su estilo.</p>
+        <button onclick="prueba3()">Aceptar</button>
+        <button onclick="volver3()">Regresar</button>
+    </div>
+
+    <div id="id4">
+        <p>
+            outerHTML es una propiedad valiosa que permite manipular la estructura completa de los elementos en el DOM. Aunque ofrece flexibilidad en la manipulación de HTML, debe utilizarse con precaución para evitar problemas de seguridad y rendimiento. Comprender cómo y cuándo usar outerHTML es esencial para un desarrollo web efectivo.
+        </p>
+        <button onclick="prueba4()">Actualizar el segundo cuadro</button>
+        <button onclick="volver4()">Regresar</button>
+    </div>
+
+    <script>
+        function prueba1() {
+            var div = document.getElementById("id1");
+            div.innerHTML = "<p>El contenido se actuliza usando innerHTML .</p><button onclick='volver1()'>Regresar</button>";
+        }
+
+        function volver1() {
+            var div1 = document.getElementById("id1");
+            div1.innerHTML = "<p>Esto es innerHTML, sirve para inyectar HTML desde un script.</p><button onclick='prueba1()'>Siguiente</button>";
+        }
+
+        function prueba2() {
+            var div2 = document.getElementsByClassName("claseejemplo");
+            div2[1].textContent = "Se cambia el texto tambien.";
+            for (var i = 0; i < div2.length; i++) {
+                div2[i].style.backgroundColor = "blue";
+            }  
+        }
+
+        function volver2() {
+            var div2 = document.getElementById("id2");
+            div2.innerHTML = `
+                <p class='claseejemplo'>getElementsByClassName es un método de JavaScript que permite seleccionar todos los elementos del DOM que tienen una clase específica y devuelve una colección de esos elementos. Esta colección se actualiza automáticamente si se añaden o eliminan elementos en el DOM con esa clase.</p>
+                <p class='claseejemplo' id='elemento'>Este texto va a tener un resaltado.</p>
+                <button onclick='prueba2()'>Aceptar</button>
+                <button onclick='volver2()'>Regresar</button>
+            `;
+        }
+
+        function prueba3() {
+            var div3 = document.getElementById("id3");
+            var elementos = div3.getElementsByTagName('p');
+
+            for (var i = 0; i < elementos.length; i++) {
+                elementos[i].style.backgroundColor = "red"; 
+            }
+        }
+
+        function volver3() {
+            var div3 = document.getElementById("id3");
+            div3.innerHTML = `
+                <h2>Parece que no cambió nada</h2>
+                <p>es un método de JavaScript que selecciona todos los elementos del DOM que tienen un nombre de etiqueta específico y devuelve una colección de esos elementos. Esta colección se puede usar para manipular y aplicar cambios a todos los elementos coincidentes, como resaltar texto o modificar su estilo.</p>
+                <button onclick="prueba3()">Aceptar</button>
+                <button onclick="volver3()">Regresar</button>
+            `;
+        }
+
+        function prueba4() {
+            var elemento = document.querySelector('.claseejemplo');
+            elemento.outerHTML = "<p class='claseejemplo'><strong>Actualicé este contenido.</strong></p>";
+        }
+
+        function volver4() {
+            var textoOriginal = "<p class='claseejemplo'>Esto es para probar un text content junto a un bucle para cambiar el color de fondo.</p>";
+            var elemento = document.querySelector('.claseejemplo');
+            elemento.outerHTML = textoOriginal;
+        }
+    </script>
+</body>
 </html>
